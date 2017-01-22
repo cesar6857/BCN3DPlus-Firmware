@@ -592,7 +592,7 @@ void manage_heater()
 #define PGM_RD_W(x)   (short)pgm_read_word(&x)
 // Derived from RepRap FiveD extruder::getTemperature()
 // For hot end temperature measurement.
-static float analog2temp(int raw, uint8_t e) {
+static float analog2tempCesar(int raw, uint8_t e) {
 #ifdef TEMP_SENSOR_1_AS_REDUNDANT
   if(e > EXTRUDERS)
 #else
@@ -637,6 +637,10 @@ static float analog2temp(int raw, uint8_t e) {
   return ((raw * ((5.0 * 100.0) / 1024.0) / OVERSAMPLENR) * TEMP_SENSOR_AD595_GAIN) + TEMP_SENSOR_AD595_OFFSET;
 }
 
+static float analog2temp(int raw, uint8_t e) {
+  return analog2tempCesar(raw, e) / HOTEND_FIX_CESAR;
+}
+
 // Derived from RepRap FiveD extruder::getTemperature()
 // For bed temperature measurement.
 static float analog2tempBed(int raw) {
@@ -673,7 +677,7 @@ static void updateTemperaturesFromRawValues()
 {
     for(uint8_t e=0;e<EXTRUDERS;e++)
     {
-        current_temperature[e] = analog2temp(current_temperature_raw[e], e) + HOTEND_FIX_CESAR;
+        current_temperature[e] = analog2temp(current_temperature_raw[e], e);
     }
     current_temperature_bed = analog2tempBed(current_temperature_bed_raw);
     #ifdef TEMP_SENSOR_1_AS_REDUNDANT

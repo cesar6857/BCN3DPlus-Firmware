@@ -1,6 +1,6 @@
 #include <U8glib.h>
 
-#define HOTEND_FIX_CESAR -120
+#define HOTEND_FIX_CESAR 1.75
 
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
