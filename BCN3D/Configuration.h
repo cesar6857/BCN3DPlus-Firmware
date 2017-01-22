@@ -1,5 +1,7 @@
 #include <U8glib.h>
 
+#define HOTEND_FIX_CESAR -120
+
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 

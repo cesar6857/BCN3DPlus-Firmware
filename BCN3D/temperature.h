@@ -58,7 +58,7 @@ extern float current_temperature_bed;
 //deg=degreeCelsius
 
 FORCE_INLINE float degHotend(uint8_t extruder) {  
-  return current_temperature[extruder];
+  return current_temperature[extruder] + HOTEND_FIX_CESAR;
 };
 
 FORCE_INLINE float degBed() {
