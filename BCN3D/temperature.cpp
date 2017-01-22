@@ -673,7 +673,7 @@ static void updateTemperaturesFromRawValues()
 {
     for(uint8_t e=0;e<EXTRUDERS;e++)
     {
-        current_temperature[e] = analog2temp(current_temperature_raw[e], e);
+        current_temperature[e] = analog2temp(current_temperature_raw[e], e) + HOTEND_FIX_CESAR;
     }
     current_temperature_bed = analog2tempBed(current_temperature_bed_raw);
     #ifdef TEMP_SENSOR_1_AS_REDUNDANT
